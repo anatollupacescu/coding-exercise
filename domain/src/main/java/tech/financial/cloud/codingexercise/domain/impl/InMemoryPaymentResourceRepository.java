@@ -1,12 +1,12 @@
-package tech.financial.cloud.codingexercise.impl;
+package tech.financial.cloud.codingexercise.domain.impl;
 
-import tech.financial.cloud.codingexercise.api.PaymentResourceRepository;
-import tech.financial.cloud.codingexercise.api.ResourceNotFoundException;
-import tech.financial.cloud.codingexercise.model.PaymentResource;
+import tech.financial.cloud.codingexercise.domain.api.Repository;
+import tech.financial.cloud.codingexercise.domain.api.ResourceNotFoundException;
+import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
 import java.util.*;
 
-public class InMemoryPaymentResourceRepository implements PaymentResourceRepository {
+public class InMemoryPaymentResourceRepository implements Repository<PaymentResource> {
 
   private Map<UUID, PaymentResource> storage = new HashMap<>();
 

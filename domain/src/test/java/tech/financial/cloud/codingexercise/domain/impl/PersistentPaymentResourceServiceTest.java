@@ -1,11 +1,11 @@
-package tech.financial.cloud.codingexercise.impl;
+package tech.financial.cloud.codingexercise.domain.impl;
 
 import org.junit.Before;
 import org.junit.Test;
-import tech.financial.cloud.codingexercise.api.PaymentResourceRepository;
-import tech.financial.cloud.codingexercise.api.PaymentResourceService;
-import tech.financial.cloud.codingexercise.api.ResourceNotFoundException;
-import tech.financial.cloud.codingexercise.model.PaymentResource;
+import tech.financial.cloud.codingexercise.domain.api.Repository;
+import tech.financial.cloud.codingexercise.domain.api.PaymentResourceService;
+import tech.financial.cloud.codingexercise.domain.api.ResourceNotFoundException;
+import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
 import java.util.Collections;
 import java.util.UUID;
@@ -19,7 +19,7 @@ public class PersistentPaymentResourceServiceTest {
 
   @Before
   public void setUp() {
-    PaymentResourceRepository resourceRepository = new InMemoryPaymentResourceRepository();
+    Repository resourceRepository = new InMemoryPaymentResourceRepository();
     paymentResourceService = new PersistentPaymentResourceService(resourceRepository);
   }
 

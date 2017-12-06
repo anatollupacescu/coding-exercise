@@ -1,7 +1,7 @@
-package tech.financial.cloud.codingexercise;
+package tech.financial.cloud.codingexercise.domain;
 
 import lombok.Data;
-import tech.financial.cloud.codingexercise.model.PaymentResource;
+import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
 import java.util.List;
 

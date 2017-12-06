@@ -1,10 +1,10 @@
-package tech.financial.cloud.codingexercise.impl;
+package tech.financial.cloud.codingexercise.domain.impl;
 
 import org.junit.Before;
 import org.junit.Test;
-import tech.financial.cloud.codingexercise.api.PaymentResourceRepository;
-import tech.financial.cloud.codingexercise.api.ResourceNotFoundException;
-import tech.financial.cloud.codingexercise.model.PaymentResource;
+import tech.financial.cloud.codingexercise.domain.api.Repository;
+import tech.financial.cloud.codingexercise.domain.api.ResourceNotFoundException;
+import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class InMemoryPaymentResourceRepositoryTest {
 
-  private PaymentResourceRepository resourceRepository;
+  private Repository resourceRepository;
 
   @Before
   public void setUp() {

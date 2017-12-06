@@ -1,6 +1,6 @@
-package tech.financial.cloud.codingexercise.api;
+package tech.financial.cloud.codingexercise.domain.api;
 
-import tech.financial.cloud.codingexercise.model.PaymentResource;
+import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
 import java.util.List;
 import java.util.UUID;

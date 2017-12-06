@@ -1,4 +1,4 @@
-package tech.financial.cloud.codingexercise.model;
+package tech.financial.cloud.codingexercise.domain.model;
 
 import lombok.Data;
 

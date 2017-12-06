@@ -1,9 +1,9 @@
-package tech.financial.cloud.codingexercise.model;
+package tech.financial.cloud.codingexercise.domain.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import sun.misc.IOUtils;
-import tech.financial.cloud.codingexercise.ApiResponse;
+import tech.financial.cloud.codingexercise.domain.ApiResponse;
 
 import java.io.IOException;
 import java.io.InputStream;
