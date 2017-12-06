@@ -27,6 +27,6 @@ public class PaymentResource implements Serializable {
     @Column(nullable = false)
     private UUID organisation_id;
 
-    @Column(nullable = false)
+    @Embedded
     private AttributesMap attributes;
 }

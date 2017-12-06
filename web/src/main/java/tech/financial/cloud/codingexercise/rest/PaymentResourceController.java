@@ -17,7 +17,7 @@ public class PaymentResourceController {
 	}
 
 	@GET
-	public List<PaymentResource> message() {
+	public List<PaymentResource> listPayments() {
 		return service.getAll();
 	}
 }

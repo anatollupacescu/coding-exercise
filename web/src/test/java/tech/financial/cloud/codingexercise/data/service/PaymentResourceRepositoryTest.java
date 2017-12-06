@@ -9,6 +9,7 @@ import tech.financial.cloud.codingexercise.data.entity.AttributesMap;
 import tech.financial.cloud.codingexercise.data.entity.PaymentResource;
 import tech.financial.cloud.codingexercise.domain.model.Type;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,17 +23,21 @@ public class PaymentResourceRepositoryTest {
 
     @Test
     public void canSave() {
-        PaymentResource resource = createPaymentResourceEntity(UUID.randomUUID());
+        PaymentResource resource = createPaymentResourceEntity();
         repository.save(resource);
         Iterable<PaymentResource> one = repository.findAll();
         assertThat(one).isNotEmpty();
+        PaymentResource next = one.iterator().next();
+        resource.setId(next.getId());
+        assertThat(next).isEqualTo(resource);
     }
 
-    private PaymentResource createPaymentResourceEntity(UUID uuid) {
+    private PaymentResource createPaymentResourceEntity() {
         PaymentResource entity = new PaymentResource();
-        entity.setId(uuid);
         entity.setOrganisation_id(UUID.randomUUID());
-        entity.setAttributes(new AttributesMap());
+        AttributesMap attributes = new AttributesMap();
+        attributes.setAmount(BigDecimal.valueOf(100.21));
+        entity.setAttributes(attributes);
         entity.setType(Type.Payment);
         return entity;
     }
