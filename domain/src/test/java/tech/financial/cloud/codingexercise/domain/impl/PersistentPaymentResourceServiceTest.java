@@ -2,8 +2,8 @@ package tech.financial.cloud.codingexercise.domain.impl;
 
 import org.junit.Before;
 import org.junit.Test;
-import tech.financial.cloud.codingexercise.domain.api.Repository;
 import tech.financial.cloud.codingexercise.domain.api.PaymentResourceService;
+import tech.financial.cloud.codingexercise.domain.api.Repository;
 import tech.financial.cloud.codingexercise.domain.api.ResourceNotFoundException;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
