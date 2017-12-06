@@ -20,6 +20,11 @@
             <artifactId>spring-boot-starter-jersey</artifactId>
         </dependency>
         <dependency>
+            <groupId>tech.financial.cloud</groupId>
+            <artifactId>domain</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
