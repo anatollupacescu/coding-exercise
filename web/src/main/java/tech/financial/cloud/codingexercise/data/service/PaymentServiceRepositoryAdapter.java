@@ -1,5 +1,6 @@
 package tech.financial.cloud.codingexercise.data.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import tech.financial.cloud.codingexercise.domain.api.Repository;
 import tech.financial.cloud.codingexercise.data.entity.PaymentResource;
 
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 public class PaymentServiceRepositoryAdapter implements Repository<PaymentResource> {
 
+    @Autowired
     private PaymentResourceRepository repository;
 
     @Override
