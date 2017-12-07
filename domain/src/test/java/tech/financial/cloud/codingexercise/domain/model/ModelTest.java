@@ -2,11 +2,12 @@ package tech.financial.cloud.codingexercise.domain.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import sun.misc.IOUtils;
+import org.apache.commons.io.IOUtils;
 import tech.financial.cloud.codingexercise.domain.ApiResponse;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -30,6 +31,6 @@ public class ModelTest {
   private String readSampleJson(String file) throws IOException {
     InputStream resource = ModelTest.class.getResourceAsStream(file);
     assertThat(resource, is(notNullValue()));
-    return new String(IOUtils.readFully(resource, -1, true));
+    return new String(IOUtils.toString(resource, StandardCharsets.UTF_8.name()));
   }
 }

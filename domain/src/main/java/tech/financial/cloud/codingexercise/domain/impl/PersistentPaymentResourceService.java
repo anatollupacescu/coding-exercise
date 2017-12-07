@@ -14,7 +14,7 @@ public class PersistentPaymentResourceService implements PaymentResourceService 
 
   private final Repository<PaymentResource> resourceRepository;
 
-  public PersistentPaymentResourceService(Repository resourceRepository) {
+  public PersistentPaymentResourceService(Repository<PaymentResource> resourceRepository) {
     this.resourceRepository = resourceRepository;
   }
 

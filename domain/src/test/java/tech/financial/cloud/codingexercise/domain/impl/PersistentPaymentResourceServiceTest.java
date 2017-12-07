@@ -19,7 +19,7 @@ public class PersistentPaymentResourceServiceTest {
 
   @Before
   public void setUp() {
-    Repository resourceRepository = new InMemoryPaymentResourceRepository();
+    Repository<PaymentResource> resourceRepository = new InMemoryPaymentResourceRepository();
     paymentResourceService = new PersistentPaymentResourceService(resourceRepository);
   }
 

@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class InMemoryPaymentResourceRepositoryTest {
 
-  private Repository resourceRepository;
+  private Repository<PaymentResource> resourceRepository;
 
   @Before
   public void setUp() {
