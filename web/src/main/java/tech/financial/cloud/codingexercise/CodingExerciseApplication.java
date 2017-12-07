@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Bean;
 import tech.financial.cloud.codingexercise.config.JerseyConfig;
 import tech.financial.cloud.codingexercise.data.service.PaymentServiceRepositoryAdapter;
 import tech.financial.cloud.codingexercise.domain.api.PaymentResourceService;
+import tech.financial.cloud.codingexercise.domain.api.Repository;
 import tech.financial.cloud.codingexercise.domain.impl.PersistentPaymentResourceService;
+import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 import tech.financial.cloud.codingexercise.rest.PaymentResourceController;
 
 @SpringBootApplication
@@ -18,7 +20,7 @@ public class CodingExerciseApplication {
   }
 
   @Bean
-  public PaymentServiceRepositoryAdapter paymentServiceSpringDataRepository() {
+  public Repository<PaymentResource> paymentServiceSpringDataRepository() {
     return new PaymentServiceRepositoryAdapter();
   }
 

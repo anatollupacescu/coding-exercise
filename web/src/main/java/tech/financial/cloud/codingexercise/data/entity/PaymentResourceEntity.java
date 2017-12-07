@@ -1,6 +1,7 @@
 package tech.financial.cloud.codingexercise.data.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 import tech.financial.cloud.codingexercise.domain.model.Type;
 
 import javax.persistence.*;
@@ -9,12 +10,12 @@ import java.util.UUID;
 
 @Entity
 @Data
-public class PaymentResource implements Serializable {
+public class PaymentResourceEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "payment_resource_generator", sequenceName = "payment_resource_sequence", initialValue = 23)
+    @SequenceGenerator(name = "payment_resource_generator", sequenceName = "payment_resource_sequence")
     @GeneratedValue(generator = "payment_resource_generator")
     private UUID id;
 
@@ -22,6 +23,7 @@ public class PaymentResource implements Serializable {
     private int version;
 
     @Column(nullable = false)
+    @Enumerated
     private Type type;
 
     @Column(nullable = false)
