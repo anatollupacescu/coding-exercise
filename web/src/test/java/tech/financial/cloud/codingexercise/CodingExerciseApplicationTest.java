@@ -22,32 +22,44 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CodingExerciseApplicationTest {
 
-  @Autowired private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-  @Test
-  public void getAllPayments() {
-    ResponseEntity<String> entity = restTemplate.getForEntity("/v1/payments", String.class);
-    assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-  }
+    @Test
+    public void getAllPayments() {
+        ResponseEntity<String> entity = restTemplate.getForEntity("/v1/payments", String.class);
+        assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
 
-  @Test
-  public void savePayment() {
-    TestUtils testUtils = new TestUtils();
-    PaymentResourceEntity paymentResourceEntity = testUtils.createPaymentResourceEntity();
-    PaymentResource payment = ModelToEntityMapper.INSTANCE.fromEntity(paymentResourceEntity);
-    payment.setId(UUID.randomUUID());
-    ResponseEntity<PaymentResource> entity =
-        restTemplate.postForEntity("/v1/payments", payment, PaymentResource.class);
-    assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-    assertThat(entity.getBody()).isNotNull();
-    PaymentResource receivedEntity = entity.getBody();
-    UUID id = receivedEntity.getId();
-    payment.setId(id);
-    List<String> receivedLocations = entity.getHeaders().get("Location");
-    assertThat(receivedLocations).isNotNull();
-    assertThat(receivedLocations.isEmpty()).isFalse();
-    String location = receivedLocations.iterator().next();
-    assertThat(location).endsWith("/v1/payments/".concat(id.toString()));
-    assertThat(receivedEntity).isEqualTo(payment);
-  }
+    @Test
+    public void savePaymentWithCorrectPersistsData() {
+        TestUtils testUtils = new TestUtils();
+        PaymentResourceEntity paymentResourceEntity = testUtils.createPaymentResourceEntity();
+        PaymentResource payment = ModelToEntityMapper.INSTANCE.fromEntity(paymentResourceEntity);
+        payment.setId(UUID.randomUUID());
+        ResponseEntity<PaymentResource> entity =
+                restTemplate.postForEntity("/v1/payments", payment, PaymentResource.class);
+        assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(entity.getBody()).isNotNull();
+        PaymentResource receivedEntity = entity.getBody();
+        UUID id = receivedEntity.getId();
+        payment.setId(id);
+        List<String> receivedLocations = entity.getHeaders().get("Location");
+        assertThat(receivedLocations).isNotNull();
+        assertThat(receivedLocations.isEmpty()).isFalse();
+        String location = receivedLocations.iterator().next();
+        assertThat(location).endsWith("/v1/payments/".concat(id.toString()));
+        assertThat(receivedEntity).isEqualTo(payment);
+    }
+
+    @Test
+    public void savePaymentWithMissingMandatoryFieldReturnBadRequest() {
+        TestUtils testUtils = new TestUtils();
+        PaymentResourceEntity paymentResourceEntity = testUtils.createPaymentResourceEntity();
+        PaymentResource payment = ModelToEntityMapper.INSTANCE.fromEntity(paymentResourceEntity);
+        payment.setType(null);
+        ResponseEntity<PaymentResource> entity = restTemplate.postForEntity("/v1/payments", payment, PaymentResource.class);
+        assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+    }
+
 }
