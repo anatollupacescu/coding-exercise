@@ -9,8 +9,8 @@ import java.util.Currency;
 @Embeddable
 @Data
 public class Fx {
-  private String contract_reference;
-  private String exchange_rate;
-  private BigDecimal original_amount;
-  private Currency original_currency;
+    private String contract_reference;
+    private String exchange_rate;
+    private BigDecimal original_amount;
+    private Currency original_currency;
 }

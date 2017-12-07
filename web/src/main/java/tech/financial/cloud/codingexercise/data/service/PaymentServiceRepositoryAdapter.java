@@ -13,39 +13,40 @@ import java.util.UUID;
 
 public class PaymentServiceRepositoryAdapter implements Repository<PaymentResource> {
 
-  @Autowired private PaymentResourceEntityRepository repository;
+    @Autowired
+    private PaymentResourceEntityRepository repository;
 
-  @Override
-  @Transactional
-  public PaymentResource save(PaymentResource paymentResource) {
-    PaymentResourceEntity entity = toEntity(paymentResource);
-    PaymentResourceEntity persistedEntity = repository.save(entity);
-    return fromEntity(persistedEntity);
-  }
+    @Override
+    @Transactional
+    public PaymentResource save(PaymentResource paymentResource) {
+        PaymentResourceEntity entity = toEntity(paymentResource);
+        PaymentResourceEntity persistedEntity = repository.save(entity);
+        return fromEntity(persistedEntity);
+    }
 
-  @Override
-  public void remove(UUID id) {
-    repository.delete(id);
-  }
+    @Override
+    public void remove(UUID id) {
+        repository.delete(id);
+    }
 
-  @Override
-  public PaymentResource get(UUID id) {
-    return fromEntity(repository.findOne(id));
-  }
+    @Override
+    public PaymentResource get(UUID id) {
+        return fromEntity(repository.findOne(id));
+    }
 
-  @Override
-  @Transactional
-  public List<PaymentResource> list() {
-    List<PaymentResource> list = new ArrayList<>();
-    repository.findAll().iterator().forEachRemaining(e -> list.add(fromEntity(e)));
-    return list;
-  }
+    @Override
+    @Transactional
+    public List<PaymentResource> list() {
+        List<PaymentResource> list = new ArrayList<>();
+        repository.findAll().iterator().forEachRemaining(e -> list.add(fromEntity(e)));
+        return list;
+    }
 
-  private PaymentResource fromEntity(PaymentResourceEntity entity) {
-    return ModelToEntityMapper.INSTANCE.fromEntity(entity);
-  }
+    private PaymentResource fromEntity(PaymentResourceEntity entity) {
+        return ModelToEntityMapper.INSTANCE.fromEntity(entity);
+    }
 
-  private PaymentResourceEntity toEntity(PaymentResource paymentResource) {
-    return ModelToEntityMapper.INSTANCE.toEntity(paymentResource);
-  }
+    private PaymentResourceEntity toEntity(PaymentResource paymentResource) {
+        return ModelToEntityMapper.INSTANCE.toEntity(paymentResource);
+    }
 }

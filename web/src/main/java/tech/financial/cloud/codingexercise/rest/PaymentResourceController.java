@@ -16,18 +16,19 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class PaymentResourceController {
 
-  @Autowired private PaymentResourceService service;
+    @Autowired
+    private PaymentResourceService service;
 
-  @GET
-  public List<PaymentResource> listPayments() {
-    return service.getAll();
-  }
+    @GET
+    public List<PaymentResource> listPayments() {
+        return service.getAll();
+    }
 
-  @POST
-  @Consumes(MediaType.APPLICATION_JSON)
-  public Response savePayment(PaymentResource resource, @Context UriInfo uriInfo) {
-    PaymentResource created = service.create(resource);
-    URI uri = uriInfo.getAbsolutePathBuilder().path(created.getId().toString()).build();
-    return Response.created(uri).entity(created).build();
-  }
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response savePayment(PaymentResource resource, @Context UriInfo uriInfo) {
+        PaymentResource created = service.create(resource);
+        URI uri = uriInfo.getAbsolutePathBuilder().path(created.getId().toString()).build();
+        return Response.created(uri).entity(created).build();
+    }
 }

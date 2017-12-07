@@ -15,27 +15,27 @@ import tech.financial.cloud.codingexercise.rest.PaymentResourceController;
 @SpringBootApplication
 public class CodingExerciseApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(CodingExerciseApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(CodingExerciseApplication.class, args);
+    }
 
-  @Bean
-  public Repository<PaymentResource> paymentServiceSpringDataRepository() {
-    return new PaymentServiceRepositoryAdapter();
-  }
+    @Bean
+    public Repository<PaymentResource> paymentServiceSpringDataRepository() {
+        return new PaymentServiceRepositoryAdapter();
+    }
 
-  @Bean
-  public PaymentResourceService paymentResourceService() {
-    return new PersistentPaymentResourceService(paymentServiceSpringDataRepository());
-  }
+    @Bean
+    public PaymentResourceService paymentResourceService() {
+        return new PersistentPaymentResourceService(paymentServiceSpringDataRepository());
+    }
 
-  @Bean
-  public PaymentResourceController paymentResourceController() {
-    return new PaymentResourceController();
-  }
+    @Bean
+    public PaymentResourceController paymentResourceController() {
+        return new PaymentResourceController();
+    }
 
-  @Bean
-  public ResourceConfig jerseyConfig() {
-    return new JerseyConfig();
-  }
+    @Bean
+    public ResourceConfig jerseyConfig() {
+        return new JerseyConfig();
+    }
 }

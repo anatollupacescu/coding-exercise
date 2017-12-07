@@ -21,51 +21,50 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 public class PaymentServiceRepositoryAdapterTest {
 
-  final TestUtils util = new TestUtils();
+    private final TestUtils util = new TestUtils();
 
-  @Mock
-  PaymentResourceEntityRepository repository;
+    @Mock
+    private PaymentResourceEntityRepository repository;
 
-  @InjectMocks
-  PaymentServiceRepositoryAdapter adapter;
+    @InjectMocks
+    private PaymentServiceRepositoryAdapter adapter;
 
-  @Test
-  public void savePersistsCorrectlyMappedEntity() throws Exception {
-    PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();
-    PaymentResource model = createPaymentResourceModel(paymentResourceEntity);
-    adapter.save(model);
-    verify(repository).save(paymentResourceEntity);
-  }
+    @Test
+    public void savePersistsCorrectlyMappedEntity() throws Exception {
+        PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();
+        PaymentResource model = createPaymentResourceModel(paymentResourceEntity);
+        adapter.save(model);
+        verify(repository).save(paymentResourceEntity);
+    }
 
-  @Test
-  public void removeDeletesCorrectId() throws Exception {
-    UUID id = UUID.randomUUID();
-    adapter.remove(id);
-    verify(repository).delete(id);
-  }
+    @Test
+    public void removeDeletesCorrectId() throws Exception {
+        UUID id = UUID.randomUUID();
+        adapter.remove(id);
+        verify(repository).delete(id);
+    }
 
-  @Test
-  public void getReturnsCorrectlyMappedModel() throws Exception {
-    UUID id = UUID.randomUUID();
-    PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();
-    when(repository.findOne(id)).thenReturn(paymentResourceEntity);
-    PaymentResource model = adapter.get(id);
-    assertThat(model, is(equalTo(createPaymentResourceModel(paymentResourceEntity))));
-  }
+    @Test
+    public void getReturnsCorrectlyMappedModel() throws Exception {
+        UUID id = UUID.randomUUID();
+        PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();
+        when(repository.findOne(id)).thenReturn(paymentResourceEntity);
+        PaymentResource model = adapter.get(id);
+        assertThat(model, is(equalTo(createPaymentResourceModel(paymentResourceEntity))));
+    }
 
-  @Test
-  public void findAllReturnsCorrectlyMappedCollection() {
-    PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();
-    when(repository.findAll()).thenReturn(Collections.singletonList(paymentResourceEntity));
-    List<PaymentResource> all = adapter.list();
-    assertThat(all, is(notNullValue()));
-    assertThat(all.isEmpty(), is(equalTo(false)));
-    PaymentResource model = all.iterator().next();
-    assertThat(model, is(equalTo(createPaymentResourceModel(paymentResourceEntity))));
+    @Test
+    public void findAllReturnsCorrectlyMappedCollection() {
+        PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();
+        when(repository.findAll()).thenReturn(Collections.singletonList(paymentResourceEntity));
+        List<PaymentResource> all = adapter.list();
+        assertThat(all, is(notNullValue()));
+        assertThat(all.isEmpty(), is(equalTo(false)));
+        PaymentResource model = all.iterator().next();
+        assertThat(model, is(equalTo(createPaymentResourceModel(paymentResourceEntity))));
+    }
 
-  }
-
-  private PaymentResource createPaymentResourceModel(PaymentResourceEntity paymentResourceEntity) {
-    return ModelToEntityMapper.INSTANCE.fromEntity(paymentResourceEntity);
-  }
+    private PaymentResource createPaymentResourceModel(PaymentResourceEntity paymentResourceEntity) {
+        return ModelToEntityMapper.INSTANCE.fromEntity(paymentResourceEntity);
+    }
 }

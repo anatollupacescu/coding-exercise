@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import tech.financial.cloud.codingexercise.data.entity.*;
+import tech.financial.cloud.codingexercise.data.entity.PaymentResourceEntity;
 
 import javax.transaction.Transactional;
 

@@ -61,5 +61,4 @@ public class CodingExerciseApplicationTest {
         ResponseEntity<PaymentResource> entity = restTemplate.postForEntity("/v1/payments", payment, PaymentResource.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
-
 }
