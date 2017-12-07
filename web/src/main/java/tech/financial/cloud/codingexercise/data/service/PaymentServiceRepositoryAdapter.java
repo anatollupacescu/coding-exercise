@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tech.financial.cloud.codingexercise.data.entity.PaymentResourceEntity;
 import tech.financial.cloud.codingexercise.domain.api.Repository;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
+import tech.financial.cloud.codingexercise.mapper.ModelToEntityMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +31,18 @@ public class PaymentServiceRepositoryAdapter implements Repository<PaymentResour
         return fromEntity(repository.findOne(id));
     }
 
-    private PaymentResource fromEntity(PaymentResourceEntity one) {
-        return null;
-    }
-
-    private PaymentResourceEntity toEntity(PaymentResource paymentResource) {
-        return null;
-    }
-
     @Override
     public List<PaymentResource> list() {
         List<PaymentResource> list = new ArrayList<>();
         repository.findAll().iterator().forEachRemaining(e -> list.add(fromEntity(e)));
         return list;
+    }
+
+    private PaymentResource fromEntity(PaymentResourceEntity entity) {
+        return ModelToEntityMapper.INSTANCE.fromEntity(entity);
+    }
+
+    private PaymentResourceEntity toEntity(PaymentResource paymentResource) {
+        return ModelToEntityMapper.INSTANCE.toEntity(paymentResource);
     }
 }
