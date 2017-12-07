@@ -12,6 +12,7 @@ import tech.financial.cloud.codingexercise.data.entity.PaymentResourceEntity;
 import tech.financial.cloud.codingexercise.data.service.TestUtils;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 import tech.financial.cloud.codingexercise.mapper.ModelToEntityMapper;
+import tech.financial.cloud.codingexercise.rest.ApiResponse;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,9 +27,16 @@ public class CodingExerciseApplicationTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void getAllPayments() {
-        ResponseEntity<String> entity = restTemplate.getForEntity("/v1/payments", String.class);
+    public void getAllPaymentsReturnsApiResponse() {
+        ResponseEntity<ApiResponse> entity = restTemplate.getForEntity("/v1/payments", ApiResponse.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        ApiResponse body = entity.getBody();
+        assertThat(body).isNotNull();
+        assertThat(body.getLinks()).isNotNull();
+        ApiResponse.Links links = body.getLinks();
+        assertThat(links.getSelf()).isNotNull();
+        List<PaymentResource> data = body.getData();
+        assertThat(data).isNotNull();
     }
 
     @Test

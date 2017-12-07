@@ -20,8 +20,13 @@ public class PaymentResourceController {
     private PaymentResourceService service;
 
     @GET
-    public List<PaymentResource> listPayments() {
-        return service.getAll();
+    public ApiResponse listPayments(@Context UriInfo uriInfo) {
+        ApiResponse response = new ApiResponse();
+        List<PaymentResource> payments = service.getAll();
+        response.setData(payments);
+        URI absolutePath = uriInfo.getAbsolutePathBuilder().build();
+        response.setLinks(ApiResponse.newLinks(absolutePath.toString()));
+        return response;
     }
 
     @POST
