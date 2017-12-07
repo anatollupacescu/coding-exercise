@@ -10,8 +10,9 @@ import java.util.Currency;
 @Embeddable
 @Data
 public class Charge {
-    @Column(nullable = false)
-    private BigDecimal amount;
-    @Column(nullable = false)
-    private Currency currency;
+  @Column(nullable = false)
+  private BigDecimal amount;
+
+  @Column(nullable = false)
+  private Currency currency;
 }
