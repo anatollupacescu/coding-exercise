@@ -40,6 +40,7 @@ public class PaymentServiceRepositoryAdapterTest {
     @Test
     public void removeDeletesCorrectId() throws Exception {
         UUID id = UUID.randomUUID();
+        when(repository.exists(id)).thenReturn(true);
         adapter.remove(id);
         verify(repository).delete(id);
     }
@@ -47,6 +48,7 @@ public class PaymentServiceRepositoryAdapterTest {
     @Test
     public void getReturnsCorrectlyMappedModel() throws Exception {
         UUID id = UUID.randomUUID();
+        when(repository.exists(id)).thenReturn(true);
         PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();
         when(repository.findOne(id)).thenReturn(paymentResourceEntity);
         PaymentResource model = adapter.get(id);

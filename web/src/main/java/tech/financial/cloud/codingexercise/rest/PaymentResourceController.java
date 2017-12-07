@@ -10,7 +10,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Path("/v1/payments")
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,11 +23,19 @@ public class PaymentResourceController {
 
     @GET
     public ApiResponse listPayments(@Context UriInfo uriInfo) {
-        ApiResponse response = new ApiResponse();
         List<PaymentResource> payments = service.getAll();
-        response.setData(payments);
-        URI absolutePath = uriInfo.getAbsolutePathBuilder().build();
-        response.setLinks(ApiResponse.newLinks(absolutePath.toString()));
+        URI uri = uriInfo.getAbsolutePathBuilder().build();
+        ApiResponse response = newApiResponse(payments, uri);
+        return response;
+    }
+
+    @GET
+    @Path("/{uuidString}")
+    public ApiResponse getSinglePayment(@PathParam("uuidString") String uuidString, @Context UriInfo uriInfo) {
+        UUID id = UUID.fromString(uuidString);
+        PaymentResource paymentResource = service.getById(id);
+        URI uri = uriInfo.getAbsolutePathBuilder().path(uuidString).build();
+        ApiResponse response = newApiResponse(Collections.singletonList(paymentResource), uri);
         return response;
     }
 
@@ -35,5 +45,20 @@ public class PaymentResourceController {
         PaymentResource created = service.create(resource);
         URI uri = uriInfo.getAbsolutePathBuilder().path(created.getId().toString()).build();
         return Response.created(uri).entity(created).build();
+    }
+
+    @DELETE
+    @Path("/{uuidString}")
+    public Response deletePayment(@PathParam("uuidString") String uuidString) {
+        UUID id = UUID.fromString(uuidString);
+        service.delete(id);
+        return Response.noContent().build();
+    }
+
+    private ApiResponse newApiResponse(List<PaymentResource> data, URI uri) {
+        ApiResponse response = new ApiResponse();
+        response.setData(data);
+        response.setLinks(ApiResponse.newLinks(uri.toString()));
+        return response;
     }
 }

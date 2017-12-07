@@ -5,6 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -66,7 +68,28 @@ public class CodingExerciseApplicationTest {
         PaymentResourceEntity paymentResourceEntity = testUtils.createPaymentResourceEntity();
         PaymentResource payment = ModelToEntityMapper.INSTANCE.fromEntity(paymentResourceEntity);
         payment.setType(null);
+        ResponseEntity<PaymentResource> response = restTemplate.postForEntity("/v1/payments", payment, PaymentResource.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+    }
+
+    @Test
+    public void deleteNonExistentPaymentReturnsBadRequest() {
+        String uuid = UUID.randomUUID().toString();
+        ResponseEntity<String> response = restTemplate.exchange("/v1/payments/".concat(uuid), HttpMethod.DELETE, HttpEntity.EMPTY, String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    public void deletingExistingPaymentRemovesEntity() {
+        TestUtils testUtils = new TestUtils();
+        PaymentResourceEntity paymentResourceEntity = testUtils.createPaymentResourceEntity();
+        PaymentResource payment = ModelToEntityMapper.INSTANCE.fromEntity(paymentResourceEntity);
+        payment.setId(UUID.randomUUID());
         ResponseEntity<PaymentResource> entity = restTemplate.postForEntity("/v1/payments", payment, PaymentResource.class);
-        assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        String uuid = entity.getBody().getId().toString();
+        ResponseEntity<String> response = restTemplate.exchange("/v1/payments/".concat(uuid), HttpMethod.DELETE, HttpEntity.EMPTY, String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        response = restTemplate.exchange("/v1/payments/".concat(uuid), HttpMethod.GET, HttpEntity.EMPTY, String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 }

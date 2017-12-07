@@ -6,6 +6,7 @@ import tech.financial.cloud.codingexercise.domain.api.Repository;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 import tech.financial.cloud.codingexercise.mapper.ModelToEntityMapper;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +27,13 @@ public class PaymentServiceRepositoryAdapter implements Repository<PaymentResour
 
     @Override
     public void remove(UUID id) {
+        assureExistence(id);
         repository.delete(id);
     }
 
     @Override
     public PaymentResource get(UUID id) {
+        assureExistence(id);
         return fromEntity(repository.findOne(id));
     }
 
@@ -40,6 +43,12 @@ public class PaymentServiceRepositoryAdapter implements Repository<PaymentResour
         List<PaymentResource> list = new ArrayList<>();
         repository.findAll().iterator().forEachRemaining(e -> list.add(fromEntity(e)));
         return list;
+    }
+
+    private void assureExistence(UUID id) {
+        if (!repository.exists(id)) {
+            throw new EntityNotFoundException(id.toString());
+        }
     }
 
     private PaymentResource fromEntity(PaymentResourceEntity entity) {
