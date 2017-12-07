@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public interface Repository<T> {
 
-  void save(T t);
+  T save(T t);
 
   void remove(UUID id);
 

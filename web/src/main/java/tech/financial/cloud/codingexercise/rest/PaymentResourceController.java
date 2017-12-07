@@ -4,21 +4,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tech.financial.cloud.codingexercise.domain.api.PaymentResourceService;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 
 @Path("/v1/payments")
 @Produces(MediaType.APPLICATION_JSON)
 public class PaymentResourceController {
 
-    @Autowired
-	private PaymentResourceService service;
+  @Autowired private PaymentResourceService service;
 
-	@GET
-	public List<PaymentResource> listPayments() {
-		return service.getAll();
-	}
+  @GET
+  public List<PaymentResource> listPayments() {
+    return service.getAll();
+  }
+
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response savePayment(PaymentResource resource, @Context UriInfo uriInfo) {
+    PaymentResource created = service.create(resource);
+    URI uri = uriInfo.getAbsolutePathBuilder().path(created.getId().toString()).build();
+    return Response.created(uri).entity(created).build();
+  }
 }

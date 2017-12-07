@@ -30,10 +30,10 @@ public class PersistentPaymentResourceService implements PaymentResourceService 
   }
 
   @Override
-  public void create(PaymentResource resource) {
+  public PaymentResource create(PaymentResource resource) {
     Objects.requireNonNull(resource, "Missing mandatory argument");
     Objects.requireNonNull(resource.getId(), "Missing resource identifier");
-    resourceRepository.save(resource);
+    return resourceRepository.save(resource);
   }
 
   @Override

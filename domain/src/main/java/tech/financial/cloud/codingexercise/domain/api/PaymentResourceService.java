@@ -11,7 +11,7 @@ public interface PaymentResourceService {
 
   PaymentResource getById(UUID id);
 
-  void create(PaymentResource resource);
+  PaymentResource create(PaymentResource resource);
 
   void delete(UUID resourceId);
 
