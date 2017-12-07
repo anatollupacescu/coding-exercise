@@ -8,10 +8,10 @@ import java.util.List;
 
 @Data
 public class ChargesInformation {
-  private String bearer_code;
-  private List<Charge> sender_charges;
-  private BigDecimal receiver_charges_amount;
-  private Currency receiver_charges_currency;
+    private String bearer_code;
+    private List<Charge> sender_charges;
+    private BigDecimal receiver_charges_amount;
+    private Currency receiver_charges_currency;
   /*
   "bearer_code": "SHAR",
   "sender_charges": [

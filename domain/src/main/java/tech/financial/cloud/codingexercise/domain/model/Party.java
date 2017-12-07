@@ -4,14 +4,14 @@ import lombok.Data;
 
 @Data
 public class Party {
-  private String account_name;
-  private String account_number;
-  private AccountNumberCode account_number_code;
-  private int account_type;
-  private String address;
-  private long bank_id;
-  private String bank_id_code;
-  private String name;
+    private String account_name;
+    private String account_number;
+    private AccountNumberCode account_number_code;
+    private int account_type;
+    private String address;
+    private long bank_id;
+    private String bank_id_code;
+    private String name;
   /*
   "beneficiary_party": {
   "account_name": "W Owens",

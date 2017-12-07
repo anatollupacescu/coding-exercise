@@ -8,27 +8,27 @@ import java.util.*;
 
 public class InMemoryPaymentResourceRepository implements Repository<PaymentResource> {
 
-  private Map<UUID, PaymentResource> storage = new HashMap<>();
+    private Map<UUID, PaymentResource> storage = new HashMap<>();
 
-  @Override
-  public PaymentResource save(PaymentResource t) {
-    return storage.put(t.getId(), t);
-  }
-
-  @Override
-  public void remove(UUID id) {
-    if (null == storage.remove(id)) {
-      throw new ResourceNotFoundException();
+    @Override
+    public PaymentResource save(PaymentResource t) {
+        return storage.put(t.getId(), t);
     }
-  }
 
-  @Override
-  public PaymentResource get(UUID id) {
-    return storage.get(id);
-  }
+    @Override
+    public void remove(UUID id) {
+        if (null == storage.remove(id)) {
+            throw new ResourceNotFoundException();
+        }
+    }
 
-  @Override
-  public List<PaymentResource> list() {
-    return new ArrayList<>(storage.values());
-  }
+    @Override
+    public PaymentResource get(UUID id) {
+        return storage.get(id);
+    }
+
+    @Override
+    public List<PaymentResource> list() {
+        return new ArrayList<>(storage.values());
+    }
 }

@@ -7,8 +7,8 @@ import java.util.Currency;
 
 @Data
 public class Charge {
-  private BigDecimal amount;
-  private Currency currency;
+    private BigDecimal amount;
+    private Currency currency;
   /*
   {
       "amount": "10.00",

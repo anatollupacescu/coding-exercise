@@ -7,13 +7,13 @@ import java.util.UUID;
 
 public interface PaymentResourceService {
 
-  List<PaymentResource> getAll();
+    List<PaymentResource> getAll();
 
-  PaymentResource getById(UUID id);
+    PaymentResource getById(UUID id);
 
-  PaymentResource create(PaymentResource resource);
+    PaymentResource create(PaymentResource resource);
 
-  void delete(UUID resourceId);
+    void delete(UUID resourceId);
 
-  void update(PaymentResource resource);
+    void update(PaymentResource resource);
 }
