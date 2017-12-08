@@ -6,9 +6,9 @@ import tech.financial.cloud.codingexercise.data.entity.PaymentResourceEntity;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
 @Mapper
-public interface ModelToEntityMapper {
+public interface PaymentResourceMapper {
 
-    ModelToEntityMapper INSTANCE = Mappers.getMapper(ModelToEntityMapper.class);
+    PaymentResourceMapper INSTANCE = Mappers.getMapper(PaymentResourceMapper.class);
 
     PaymentResourceEntity toEntity(PaymentResource target);
 

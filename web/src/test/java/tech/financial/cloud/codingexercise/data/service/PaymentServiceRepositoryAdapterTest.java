@@ -3,12 +3,14 @@ package tech.financial.cloud.codingexercise.data.service;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 import tech.financial.cloud.codingexercise.data.entity.PaymentResourceEntity;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
-import tech.financial.cloud.codingexercise.mapper.ModelToEntityMapper;
+import tech.financial.cloud.codingexercise.mapper.PaymentResourceMapper;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -66,7 +68,31 @@ public class PaymentServiceRepositoryAdapterTest {
         assertThat(model, is(equalTo(createPaymentResourceModel(paymentResourceEntity))));
     }
 
+    @Test(expected = EntityNotFoundException.class)
+    public void updateNonExistentEntityThrowsException() {
+        PaymentResource entity = createPaymentResourceModel(util.createPaymentResourceEntity());
+        adapter.update(UUID.randomUUID(), entity);
+    }
+
+    @Test
+    public void resourceUpdatedWithCorrectInput() {
+        UUID id1 = UUID.randomUUID();
+        PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();
+        when(repository.exists(id1)).thenReturn(true);
+        when(repository.findOne(id1)).thenReturn(paymentResourceEntity);
+
+        PaymentResourceEntity paymentResourceEntity1 = util.createPaymentResourceEntity();
+        paymentResourceEntity1.setVersion(3);
+
+        when(repository.save(Matchers.<PaymentResourceEntity>any())).thenReturn(paymentResourceEntity1);
+
+        PaymentResource entity2 = createPaymentResourceModel(paymentResourceEntity1);
+        PaymentResource updatedResource = adapter.update(id1, entity2);
+
+        assertThat(updatedResource.getVersion(), is(equalTo(3)));
+    }
+
     private PaymentResource createPaymentResourceModel(PaymentResourceEntity paymentResourceEntity) {
-        return ModelToEntityMapper.INSTANCE.fromEntity(paymentResourceEntity);
+        return PaymentResourceMapper.INSTANCE.fromEntity(paymentResourceEntity);
     }
 }

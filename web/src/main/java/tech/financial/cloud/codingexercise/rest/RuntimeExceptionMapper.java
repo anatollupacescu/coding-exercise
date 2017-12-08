@@ -1,7 +1,5 @@
 package tech.financial.cloud.codingexercise.rest;
 
-import lombok.Data;
-
 import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,11 +20,5 @@ public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException>
                 .entity(errorMessage)
                 .type(MediaType.APPLICATION_JSON)
                 .build();
-    }
-
-    @Data
-    class ErrorMessage {
-        int status;
-        String message;
     }
 }

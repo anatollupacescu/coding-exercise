@@ -55,6 +55,15 @@ public class PaymentResourceController {
         return Response.noContent().build();
     }
 
+    @PUT
+    @Path("/{uuidString}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updatePayment(@PathParam("uuidString") String uuidString, PaymentResource resource) {
+        UUID id = UUID.fromString(uuidString);
+        service.update(id, resource);
+        return Response.noContent().build();
+    }
+
     private ApiResponse newApiResponse(List<PaymentResource> data, URI uri) {
         ApiResponse response = new ApiResponse();
         response.setData(data);
