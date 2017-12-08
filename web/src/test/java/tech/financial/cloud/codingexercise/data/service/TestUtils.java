@@ -62,7 +62,7 @@ public class TestUtils {
 
     private Charge charge() {
         Charge charge = new Charge();
-        charge.setAmount(BigDecimal.valueOf(45.22));
+        charge.setAmount("45.22");
         charge.setCurrency(Currency.getInstance("USD"));
         return charge;
     }

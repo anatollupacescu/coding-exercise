@@ -11,7 +11,7 @@ import java.util.Currency;
 @Data
 public class Charge {
     @Column(nullable = false)
-    private BigDecimal amount;
+    private String amount;
 
     @Column(nullable = false)
     private Currency currency;

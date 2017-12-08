@@ -33,7 +33,7 @@ public class PaymentResourceController {
     public ApiResponse getSinglePayment(@PathParam("uuidString") String uuidString, @Context UriInfo uriInfo) {
         UUID id = UUID.fromString(uuidString);
         PaymentResource paymentResource = service.getById(id);
-        URI uri = uriInfo.getAbsolutePathBuilder().path(uuidString).build();
+        URI uri = uriInfo.getAbsolutePathBuilder().build();
         return newApiResponse(Collections.singletonList(paymentResource), uri);
     }
 

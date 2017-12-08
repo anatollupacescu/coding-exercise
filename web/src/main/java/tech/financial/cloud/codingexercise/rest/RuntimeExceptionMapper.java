@@ -15,10 +15,19 @@ public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException>
         } else {
             errorMessage.setStatus(400);
         }
-        errorMessage.setMessage(ex.getMessage());
+        errorMessage.setMessage(getInitialCause(ex));
         return Response.status(errorMessage.getStatus())
                 .entity(errorMessage)
                 .type(MediaType.APPLICATION_JSON)
                 .build();
+    }
+
+    private String getInitialCause(Throwable ex) {
+        String message = null;
+        while (ex != null) {
+            message = ex.getMessage();
+            ex = ex.getCause();
+        }
+        return message;
     }
 }

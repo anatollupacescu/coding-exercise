@@ -90,6 +90,8 @@ public class PaymentResourceControllerIT {
         ResponseEntity<ApiResponse> retrievedResource = getById(id);
         ApiResponse body = retrievedResource.getBody();
         assertThat(body).isNotNull();
+        String expectedSelf = ApiResponse.newLinks(PAYMENTS_URL.concat(id.toString())).getSelf();
+        assertThat(body.getLinks().getSelf()).endsWith(expectedSelf);
         List<PaymentResource> data = body.getData();
         assertThat(data).isNotNull();
         payment.setId(id);
@@ -202,7 +204,7 @@ public class PaymentResourceControllerIT {
     private Charge newCharge() {
         Charge charge = new Charge();
         charge.setCurrency(Currency.getInstance("RON"));
-        charge.setAmount(BigDecimal.valueOf(99.34));
+        charge.setAmount("99.34");
         return charge;
     }
 }
