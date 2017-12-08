@@ -25,8 +25,7 @@ public class PaymentResourceController {
     public ApiResponse listPayments(@Context UriInfo uriInfo) {
         List<PaymentResource> payments = service.getAll();
         URI uri = uriInfo.getAbsolutePathBuilder().build();
-        ApiResponse response = newApiResponse(payments, uri);
-        return response;
+        return newApiResponse(payments, uri);
     }
 
     @GET
@@ -35,8 +34,7 @@ public class PaymentResourceController {
         UUID id = UUID.fromString(uuidString);
         PaymentResource paymentResource = service.getById(id);
         URI uri = uriInfo.getAbsolutePathBuilder().path(uuidString).build();
-        ApiResponse response = newApiResponse(Collections.singletonList(paymentResource), uri);
-        return response;
+        return newApiResponse(Collections.singletonList(paymentResource), uri);
     }
 
     @POST
@@ -44,7 +42,8 @@ public class PaymentResourceController {
     public Response savePayment(PaymentResource resource, @Context UriInfo uriInfo) {
         PaymentResource created = service.create(resource);
         URI uri = uriInfo.getAbsolutePathBuilder().path(created.getId().toString()).build();
-        return Response.created(uri).entity(created).build();
+        ApiResponse response = newApiResponse(Collections.singletonList(created), uri);
+        return Response.created(uri).entity(response).build();
     }
 
     @DELETE
