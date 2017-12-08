@@ -32,7 +32,6 @@ public class PersistentPaymentResourceService implements PaymentResourceService 
     @Override
     public PaymentResource create(PaymentResource resource) {
         Objects.requireNonNull(resource, "Missing mandatory argument");
-        Objects.requireNonNull(resource.getId(), "Missing resource identifier");
         return resourceRepository.save(resource);
     }
 
@@ -43,13 +42,9 @@ public class PersistentPaymentResourceService implements PaymentResourceService 
     }
 
     @Override
-    public void update(PaymentResource resource) {
+    public void update(UUID id, PaymentResource resource) {
         Objects.requireNonNull(resource, "Missing mandatory argument");
-        UUID id = resource.getId();
         Objects.requireNonNull(id, "Missing resource identifier");
-        if (resourceRepository.get(id) == null) {
-            throw new ResourceNotFoundException();
-        }
-        resourceRepository.save(resource);
+        resourceRepository.update(id, resource);
     }
 }

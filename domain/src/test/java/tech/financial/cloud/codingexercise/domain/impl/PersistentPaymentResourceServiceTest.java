@@ -62,17 +62,17 @@ public class PersistentPaymentResourceServiceTest {
     @Test(expected = NullPointerException.class)
     public void canNotUpdatePaymentResourceWithoutId() throws Exception {
         PaymentResource paymentResource = new PaymentResource();
-        paymentResourceService.update(paymentResource);
+        paymentResourceService.update(null, paymentResource);
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void canNotUpdateMissingResource() throws Exception {
-        paymentResourceService.update(createPaymentResource(UUID.randomUUID()));
+        paymentResourceService.update(UUID.randomUUID(), createPaymentResource(UUID.randomUUID()));
     }
 
     @Test(expected = NullPointerException.class)
     public void callingUpdateWithNullArgumentThrowsNPE() {
-        paymentResourceService.update(null);
+        paymentResourceService.update(UUID.randomUUID(), null);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class PersistentPaymentResourceServiceTest {
         paymentResourceService.create(paymentResource);
         paymentResource = createPaymentResource(uuid);
         paymentResource.setVersion(2);
-        paymentResourceService.update(paymentResource);
+        paymentResourceService.update(uuid, paymentResource);
         PaymentResource byId = paymentResourceService.getById(uuid);
         assertThat(byId, is(notNullValue()));
         assertThat(byId.getVersion(), is(equalTo(2)));

@@ -15,5 +15,5 @@ public interface PaymentResourceService {
 
     void delete(UUID resourceId);
 
-    void update(PaymentResource resource);
+    void update(UUID uuid, PaymentResource resource);
 }
