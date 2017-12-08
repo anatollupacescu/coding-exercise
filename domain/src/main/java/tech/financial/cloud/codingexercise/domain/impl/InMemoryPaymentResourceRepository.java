@@ -19,8 +19,11 @@ public class InMemoryPaymentResourceRepository implements Repository<PaymentReso
     }
 
     @Override
-    public PaymentResource save(PaymentResource t) {
-        return storage.put(t.getId(), t);
+    public PaymentResource save(PaymentResource resource) {
+        UUID key = UUID.randomUUID();
+        storage.put(key, resource);
+        resource.setId(key);
+        return storage.get(key);
     }
 
     @Override

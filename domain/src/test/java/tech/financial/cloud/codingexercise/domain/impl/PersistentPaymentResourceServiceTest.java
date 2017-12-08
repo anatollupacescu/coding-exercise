@@ -28,14 +28,13 @@ public class PersistentPaymentResourceServiceTest {
         UUID uuid = UUID.randomUUID();
         PaymentResource paymentResource = createPaymentResource(uuid);
         paymentResourceService.create(paymentResource);
-        assertThat(paymentResourceService.getById(uuid), is(equalTo(paymentResource)));
-        assertThat(
-                paymentResourceService.getAll(), is(equalTo(Collections.singletonList(paymentResource))));
+        assertThat(paymentResourceService.getById(uuid), is(not(equalTo(paymentResource))));
+        assertThat(paymentResourceService.getAll(), is(equalTo(Collections.singletonList(paymentResource))));
     }
 
     @Test(expected = NullPointerException.class)
-    public void canNotCreatePaymentResourceWithoutId() throws Exception {
-        PaymentResource paymentResource = new PaymentResource();
+    public void canNotCreatePaymentResourceWithNullArgument() throws Exception {
+        PaymentResource paymentResource = null;
         paymentResourceService.create(paymentResource);
     }
 
@@ -53,7 +52,8 @@ public class PersistentPaymentResourceServiceTest {
     public void deletedResourceNoLongerAvailable() {
         UUID uuid = UUID.randomUUID();
         PaymentResource paymentResource = createPaymentResource(uuid);
-        paymentResourceService.create(paymentResource);
+        paymentResource = paymentResourceService.create(paymentResource);
+        uuid = paymentResource.getId();
         paymentResourceService.delete(uuid);
         assertThat(paymentResourceService.getById(uuid), is(nullValue()));
         assertThat(paymentResourceService.getAll().isEmpty(), is(equalTo(true)));
@@ -79,9 +79,9 @@ public class PersistentPaymentResourceServiceTest {
     public void updateResourcePaymentIsPersisted() {
         UUID uuid = UUID.randomUUID();
         PaymentResource paymentResource = createPaymentResource(uuid);
-        paymentResourceService.create(paymentResource);
-        paymentResource = createPaymentResource(uuid);
+        paymentResource = paymentResourceService.create(paymentResource);
         paymentResource.setVersion(2);
+        uuid = paymentResource.getId();
         paymentResourceService.update(uuid, paymentResource);
         PaymentResource byId = paymentResourceService.getById(uuid);
         assertThat(byId, is(notNullValue()));

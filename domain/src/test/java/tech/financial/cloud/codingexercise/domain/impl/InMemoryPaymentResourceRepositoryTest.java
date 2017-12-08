@@ -47,25 +47,6 @@ public class InMemoryPaymentResourceRepositoryTest {
         assertThat(list.size(), is(equalTo(2)));
     }
 
-    @Test
-    public void onlyLatestSavedResourceIsPersisted() {
-        UUID uuid = UUID.randomUUID();
-        PaymentResource paymentResource = createPaymentResource(uuid);
-        resourceRepository.save(paymentResource);
-        paymentResource = createPaymentResource(uuid);
-        paymentResource.setVersion(2);
-        resourceRepository.save(paymentResource);
-        List<PaymentResource> list = resourceRepository.list();
-        assertThat(list.size(), is(equalTo(1)));
-        assertThat(list.iterator().next(), is(equalTo(paymentResource)));
-    }
-
-    private PaymentResource createPaymentResource(UUID uuid) {
-        PaymentResource paymentResource = new PaymentResource();
-        paymentResource.setId(uuid);
-        return paymentResource;
-    }
-
     @Test(expected = ResourceNotFoundException.class)
     public void canNotRemoveNonExistentResource() {
         UUID uuid = UUID.randomUUID();
@@ -76,8 +57,15 @@ public class InMemoryPaymentResourceRepositoryTest {
     public void presentResourceCanBeRemoved() {
         UUID uuid = UUID.randomUUID();
         PaymentResource paymentResource = createPaymentResource(uuid);
-        resourceRepository.save(paymentResource);
+        paymentResource = resourceRepository.save(paymentResource);
+        uuid = paymentResource.getId();
         resourceRepository.remove(uuid);
         assertThat(resourceRepository.list().isEmpty(), is(equalTo(true)));
+    }
+
+    private PaymentResource createPaymentResource(UUID uuid) {
+        PaymentResource paymentResource = new PaymentResource();
+        paymentResource.setId(uuid);
+        return paymentResource;
     }
 }
