@@ -11,20 +11,20 @@ import javax.persistence.Enumerated;
 @Data
 public class Party {
 
-    @Column(nullable = false)
+    @Column
     private String account_name;
 
     @Column(nullable = false)
     private String account_number;
 
-    @Column(nullable = false)
+    @Column
     @Enumerated
     private AccountNumberCode account_number_code;
 
-    @Column(nullable = false)
+    @Column
     private int account_type;
 
-    @Column(nullable = false)
+    @Column
     private String address;
 
     @Column(nullable = false)
@@ -33,6 +33,6 @@ public class Party {
     @Column(nullable = false)
     private String bank_id_code;
 
-    @Column(nullable = false)
+    @Column
     private String name;
 }
