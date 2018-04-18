@@ -1,26 +1,27 @@
 package tech.financial.cloud.codingexercise.data.service;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+import javax.persistence.EntityNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 import tech.financial.cloud.codingexercise.data.entity.PaymentResourceEntity;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 import tech.financial.cloud.codingexercise.mapper.PaymentResourceMapper;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class PaymentServiceRepositoryAdapterTest {
 
     private final TestUtils util = new TestUtils();
@@ -32,7 +33,7 @@ public class PaymentServiceRepositoryAdapterTest {
     private PaymentServiceRepositoryAdapter adapter;
 
     @Test
-    public void savePersistsCorrectlyMappedEntity() throws Exception {
+    public void savePersistsCorrectlyMappedEntity() {
         PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();
         PaymentResource model = createPaymentResourceModel(paymentResourceEntity);
         adapter.save(model);
@@ -40,7 +41,7 @@ public class PaymentServiceRepositoryAdapterTest {
     }
 
     @Test
-    public void removeDeletesCorrectId() throws Exception {
+    public void removeDeletesCorrectId() {
         UUID id = UUID.randomUUID();
         when(repository.exists(id)).thenReturn(true);
         adapter.remove(id);
@@ -48,7 +49,7 @@ public class PaymentServiceRepositoryAdapterTest {
     }
 
     @Test
-    public void getReturnsCorrectlyMappedModel() throws Exception {
+    public void getReturnsCorrectlyMappedModel() {
         UUID id = UUID.randomUUID();
         when(repository.exists(id)).thenReturn(true);
         PaymentResourceEntity paymentResourceEntity = util.createPaymentResourceEntity();

@@ -1,11 +1,10 @@
 package tech.financial.cloud.codingexercise.data.entity;
 
-import lombok.Data;
-import tech.financial.cloud.codingexercise.domain.model.AccountNumberCode;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Enumerated;
+import lombok.Data;
+import tech.financial.cloud.codingexercise.domain.model.AccountNumberCode;
 
 @Embeddable
 @Data

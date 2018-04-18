@@ -1,16 +1,17 @@
 package tech.financial.cloud.codingexercise.domain.impl;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+import java.util.UUID;
 import org.junit.Before;
 import org.junit.Test;
 import tech.financial.cloud.codingexercise.domain.api.Repository;
 import tech.financial.cloud.codingexercise.domain.api.ResourceNotFoundException;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
-
-import java.util.List;
-import java.util.UUID;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
 
 public class InMemoryPaymentResourceRepositoryTest {
 

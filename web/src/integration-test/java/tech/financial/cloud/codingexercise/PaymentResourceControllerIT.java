@@ -1,5 +1,11 @@
-package tech.financial.cloud.codingexercise.rest;
+package tech.financial.cloud.codingexercise;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Collections;
+import java.util.Currency;
+import java.util.List;
+import java.util.UUID;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +23,8 @@ import tech.financial.cloud.codingexercise.domain.model.AttributesMap;
 import tech.financial.cloud.codingexercise.domain.model.ChargesInformation;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 import tech.financial.cloud.codingexercise.mapper.PaymentResourceMapper;
-
-import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.Currency;
-import java.util.List;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import tech.financial.cloud.codingexercise.rest.ApiResponse;
+import tech.financial.cloud.codingexercise.rest.ErrorMessage;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

@@ -1,8 +1,7 @@
 package tech.financial.cloud.codingexercise.domain.model;
 
-import lombok.Data;
-
 import java.util.UUID;
+import lombok.Data;
 
 @Data
 public class PaymentResource {

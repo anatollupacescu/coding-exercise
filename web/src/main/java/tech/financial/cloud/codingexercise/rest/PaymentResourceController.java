@@ -1,18 +1,24 @@
 package tech.financial.cloud.codingexercise.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import tech.financial.cloud.codingexercise.domain.api.PaymentResourceService;
-import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import tech.financial.cloud.codingexercise.domain.api.PaymentResourceService;
+import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
 @Path("/v1/payments")
 @Produces(MediaType.APPLICATION_JSON)

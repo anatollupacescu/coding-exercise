@@ -1,16 +1,17 @@
 package tech.financial.cloud.codingexercise.domain.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.apache.commons.io.IOUtils;
+import org.junit.Test;
 
 public class ModelTest {
 
@@ -30,6 +31,6 @@ public class ModelTest {
     private String readSampleJson(String file) throws IOException {
         InputStream resource = ModelTest.class.getResourceAsStream(file);
         assertThat(resource, is(notNullValue()));
-        return new String(IOUtils.toString(resource, StandardCharsets.UTF_8.name()));
+        return IOUtils.toString(resource, StandardCharsets.UTF_8.name());
     }
 }

@@ -1,14 +1,12 @@
 package tech.financial.cloud.codingexercise.domain.impl;
 
-import tech.financial.cloud.codingexercise.domain.api.PaymentResourceService;
-import tech.financial.cloud.codingexercise.domain.api.Repository;
-import tech.financial.cloud.codingexercise.domain.api.ResourceNotFoundException;
-import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import tech.financial.cloud.codingexercise.domain.api.PaymentResourceService;
+import tech.financial.cloud.codingexercise.domain.api.Repository;
+import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
 
 public class PersistentPaymentResourceService implements PaymentResourceService {
 

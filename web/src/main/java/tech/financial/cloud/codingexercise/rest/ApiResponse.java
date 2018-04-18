@@ -1,9 +1,8 @@
 package tech.financial.cloud.codingexercise.rest;
 
+import java.util.List;
 import lombok.Data;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
-
-import java.util.List;
 
 @Data
 public class ApiResponse {

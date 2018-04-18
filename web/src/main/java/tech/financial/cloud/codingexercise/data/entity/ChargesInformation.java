@@ -1,14 +1,13 @@
 package tech.financial.cloud.codingexercise.data.entity;
 
-import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
+import lombok.Data;
 
 @Embeddable
 @Data

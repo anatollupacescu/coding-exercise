@@ -1,8 +1,7 @@
 package tech.financial.cloud.codingexercise.domain.model;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 class ApiResponse {

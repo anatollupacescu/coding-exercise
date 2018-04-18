@@ -1,11 +1,16 @@
 package tech.financial.cloud.codingexercise.data.entity;
 
-import lombok.Data;
-import tech.financial.cloud.codingexercise.domain.model.Type;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import lombok.Data;
+import tech.financial.cloud.codingexercise.domain.model.Type;
 
 @Entity
 @Data

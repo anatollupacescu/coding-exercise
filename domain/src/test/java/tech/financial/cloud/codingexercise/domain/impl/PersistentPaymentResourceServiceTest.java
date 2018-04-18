@@ -1,17 +1,20 @@
 package tech.financial.cloud.codingexercise.domain.impl;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
+
+import java.util.Collections;
+import java.util.UUID;
 import org.junit.Before;
 import org.junit.Test;
 import tech.financial.cloud.codingexercise.domain.api.PaymentResourceService;
 import tech.financial.cloud.codingexercise.domain.api.Repository;
 import tech.financial.cloud.codingexercise.domain.api.ResourceNotFoundException;
 import tech.financial.cloud.codingexercise.domain.model.PaymentResource;
-
-import java.util.Collections;
-import java.util.UUID;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
 
 public class PersistentPaymentResourceServiceTest {
 
@@ -24,7 +27,7 @@ public class PersistentPaymentResourceServiceTest {
     }
 
     @Test
-    public void canCreatePaymentResource() throws Exception {
+    public void canCreatePaymentResource() {
         UUID uuid = UUID.randomUUID();
         PaymentResource paymentResource = createPaymentResource(uuid);
         paymentResourceService.create(paymentResource);
@@ -33,18 +36,17 @@ public class PersistentPaymentResourceServiceTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void canNotCreatePaymentResourceWithNullArgument() throws Exception {
-        PaymentResource paymentResource = null;
-        paymentResourceService.create(paymentResource);
+    public void canNotCreatePaymentResourceWithNullArgument() {
+        paymentResourceService.create(null);
     }
 
     @Test(expected = ResourceNotFoundException.class)
-    public void canNotDeleteMissingPaymentResource() throws Exception {
+    public void canNotDeleteMissingPaymentResource() {
         paymentResourceService.delete(UUID.randomUUID());
     }
 
     @Test(expected = NullPointerException.class)
-    public void callingDeleteWithNullArgumentThrowsNPE() throws Exception {
+    public void callingDeleteWithNullArgumentThrowsNPE() {
         paymentResourceService.delete(null);
     }
 
@@ -60,13 +62,13 @@ public class PersistentPaymentResourceServiceTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void canNotUpdatePaymentResourceWithoutId() throws Exception {
+    public void canNotUpdatePaymentResourceWithoutId() {
         PaymentResource paymentResource = new PaymentResource();
         paymentResourceService.update(null, paymentResource);
     }
 
     @Test(expected = ResourceNotFoundException.class)
-    public void canNotUpdateMissingResource() throws Exception {
+    public void canNotUpdateMissingResource() {
         paymentResourceService.update(UUID.randomUUID(), createPaymentResource(UUID.randomUUID()));
     }
 
