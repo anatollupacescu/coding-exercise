@@ -12,6 +12,7 @@
 
   <properties>
     <mapstruct.version>1.2.0.Final</mapstruct.version>
+    <jgiven.version>0.15.3</jgiven.version>
   </properties>
 
   <dependencies>
@@ -47,10 +48,23 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <optional>true</optional>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.tngtech.jgiven</groupId>
+      <artifactId>jgiven-junit</artifactId>
+      <version>${jgiven.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.tngtech.jgiven</groupId>
+      <artifactId>jgiven-spring</artifactId>
+      <version>${jgiven.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
